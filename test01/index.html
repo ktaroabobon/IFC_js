@@ -27,9 +27,21 @@
         </div>
     </div>
 </nav>
-<div class="message-container">
-    <p class="d-inline message">ID:</p>
-    <p class="d-inline message" id="id-output">None</p>
+<div class="mt-2 me-2 d-flex justify-content-end">
+    <div class="card" id="objectInfoCard">
+        <div class="card-header">
+            Object Info
+        </div>
+        <ul class="list-group list-group-flush object-info-list">
+            <li class="list-group-item">ID: <span id="id-output">None</span></li>
+            <li class="list-group-item">Type: <span id="type-output">None</span></li>
+            <li class="list-group-item">Property Set: <span id="pset-output">None</span></li>
+            <li class="list-group-item">Item Property: <span id="ips-output">None</span></li>
+        </ul>
+    </div>
+</div>
+<div class="canvas-container">
+
 </div>
 <canvas id="three-canvas"></canvas>
 <script src="bundle.js"></script>

@@ -8,6 +8,19 @@ html, body {
     overflow: hidden;
 }
 
+#file-input {
+    z-index: 1;
+}
+
+#objectInfoCard {
+    max-width: 18rem;
+    z-index: 1;
+}
+
+.object-info-list li {
+    font-size: .75rem;
+}
+
 #three-canvas {
     position: fixed;
     top: 0;
@@ -15,6 +28,3 @@ html, body {
     outline: none;
 }
 
-#file-input {
-    z-index: 1;
-}

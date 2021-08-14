@@ -180,18 +180,52 @@ window.onmousemove = (event) => highlight(event, preselectMat, highlightModel);
 
 window.ondblclick = (event) => highlight(event, selectMat, selectModel);
 
-const output = document.getElementById("id-output");
+const outputId = document.getElementById("id-output");
+const outputType = document.getElementById("type-output");
+const outputPset = document.getElementById("pset-output");
 
-function pick(event) {
+function getExpressIdByEvent(found) {
+    const index = found.faceIndex;
+    const geometry = found.object.geometry;
+    const ifc = ifcLoader.ifcManager;
+    return ifc.getExpressId(geometry, index);
+}
+
+function pickUpId(event) {
     const found = cast(event)[0];
     if (found) {
-        const index = found.faceIndex;
-        const geometry = found.object.geometry;
-        const ifc = ifcLoader.ifcManager;
-        const id = ifc.getExpressId(geometry, index);
+        const id = getExpressIdByEvent(found)
         console.log(id);
-        output.innerHTML = id;
+        outputId.innerHTML = id;
     }
 }
 
-window.ondblclick = pick;
+function pickUpType(event) {
+    const found = cast(event)[0];
+    if (found) {
+        const ifc = ifcLoader.ifcManager;
+        const type = ifc.getIfcType(found.object.modelID, getExpressIdByEvent(found));
+        console.log(type);
+        outputId.innerHTML = type;
+    }
+}
+
+function pickUpPset(event) {
+    const found = cast(event)[0];
+    if (found) {
+        const ifc = ifcLoader.ifcManager;
+        const psets = ifc.getPropertySets(found.object.modelID, getExpressIdByEvent(found));
+        for (var i = 0; i < psets.length; i++) {
+            console.log(psets[i]);
+            outputPset.innerHTML = psets[i];
+        }
+    }
+}
+
+function getInfoByElement(event) {
+    pickUpId(event);
+    pickUpType(event);
+    pickUpPset(event);
+}
+
+window.ondblclick = getInfoByElement;
